@@ -132,7 +132,7 @@ class jazzChord {
 
     // determine whether to use sharps or flats
     // TODO fix this value for Gminor and Cminor...
-    if (combinedTonicArray[1] === 'b' || combinedTonicArray[0] === 'F' || (combinedTonicArray[1] === 'C' && isMin) || (combinedTonicArray[1] === 'G' && isMin)) {
+    if (combinedTonicArray[1] === 'b' || combinedTonicArray[0] === 'F') {
         isFlat = true;
     } else {
         isSharp = true;
@@ -183,9 +183,8 @@ class jazzChord {
     } else {
         //throw new Error('Not a valid chord input type');
     }
-
-    // add spiceNotes based on flavorNote
     /*
+    // add chord extensions based on flavornotes
     if (this.flavorNote && (this.chordType === 'maj' || !this.chordType)) {
         chordNotes.push(correctNotesArray[tonicIndex + majorSeventh]);
     } 
@@ -297,11 +296,11 @@ class jazzChord {
     } 
     if (flavorNote === '11' && isMaj) {
         chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
+        chordNotes.push(correctNotesArray[tonicIndex + aug11th]);
     } 
     if (flavorNote === '13' && isMaj) {
         chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
+        chordNotes.push(correctNotesArray[tonicIndex + aug11th]);
         chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
     } 
     if (flavorNote && isMin) {
@@ -324,131 +323,6 @@ class jazzChord {
     return chordNotes;
     
   }
-  /*
-  numberGenerator(array) {
-
-    // create chordNotes array to work with
-    let chordNotes = new jazzChord(this.tonic, this.chordType).chordGenerator();
-
-    // definitons of variables and arrays/strings to use upper or lowercase input
-    let upperCaseTonic = changeToUpperCase(this.tonic);
-    let tonicArray = Array.from(this.tonic);
-    let upperTonicArray = Array.from(upperCaseTonic);
-    let combinedTonicString;
-
-    let tonicIndex = 0;
-    let isSharp = false;
-    let isFlat = false;
-
-    // if statement to avoid undefined result if no sharp or flat in the second index
-    if (upperTonicArray[1]) {
-        combinedTonicString = upperTonicArray[0] + tonicArray[1];
-    } else {
-        combinedTonicString = upperTonicArray[0]
-    }
-
-    let combinedTonicArray = Array.from(combinedTonicString);
-
-    // logic for whether isMaj, isMin, isDom is true or false
-
-    let isMaj = false;
-    let isMin = false;
-    let isDom = false;
-    let domArray = Array.from(flavorNote);
-    let domString = domArray[0] + domArray[1] + domArray[2];
-
-    if ((this.chordType === 'maj' || !this.chordType) && (domString === 'dom')) {
-        isDom = true;
-    } else if (this.chordType === 'maj' || !this.chordType) {
-        isMaj = true;
-    } else if (this.chordType === 'min' || this.chordType === '-') {
-        isMin = true;
-    } else {
-        throw new Error('Not a valid chord extension type. Use \'dom\' for dominant 7th chord extensions.');
-    }
-
-    // determine whether to use sharps or flats
-    // TODO fix this value for Gminor and Cminor...
-
-    if (combinedTonicArray[1] === 'b' || combinedTonicArray[0] === 'F' || (combinedTonicArray[1] === 'C' && isMin) || (combinedTonicArray[1] === 'G' && isMin)) {
-        isFlat = true;
-    } else {
-        isSharp = true;
-    }
-    if (combinedTonicArray[1] === '#') {
-        isFlat = false;
-        isSharp = true;
-    } 
-
-    // generalize chord array to use
-
-    let correctNotesArray = [];
-    
-    if (isFlat) {
-        correctNotesArray = notesArrayFlat;
-    } else {
-        correctNotesArray = notesArraySharp;
-    }
-
-    // logic for adding chord extensions
-
-    tonicIndex = correctNotesArray.indexOf(combinedTonicString);
-
-    if (flavorNote && isMaj) {
-        chordNotes.push(correctNotesArray[tonicIndex + majorSeventh]);
-    } 
-    if (flavorNote === '9' && isMaj) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-    } 
-    if (flavorNote === '11' && isMaj) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-    } 
-    if (flavorNote === '13' && isMaj) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-        chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
-    } 
-    if (flavorNote && isMin) {
-        chordNotes.push(correctNotesArray[tonicIndex + dimSeventh]);
-    } 
-    if (flavorNote === '9' && isMin) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-    } 
-    if (flavorNote === '11' && isMin) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-    } 
-    if (flavorNote === '13' && isMin) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-        chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
-    }
-    // TODO add logic for if domstring === 'dom', then create logic for dominant chord extensions
-
-    return chordNotes;
-    
-  }
-
-  major9thVoicings() {
-  }
-
-  minor9thVoicings() {
-  }
-
-  major11thVoicings() {
-  }
-
-  minor11thVoicings() {
-  }
-
-  major13thVoicings() {
-  }
-
-  dominantVoicings() {
-  }
-  */
-
 }
 
 class jazzChordNumbers {
@@ -490,31 +364,27 @@ class jazzChordNumbers {
 
         // logic for returning array with numbers
         tonicIndex = correctNotesArray.indexOf(tonic);
-        let newTonicArray = correctNotesArray.slice(tonicIndex, correctNotesArray.length);
+        let newTonicArray = correctNotesArray.slice(tonicIndex, correctNotesArray.length)
+
         // forEach method applied to create array with indices values
-        //console.log(tonicIndex);
-        //console.log(newTonicArray);
         let indexArray = [];
         this.array.forEach(element => {
             indexArray.push(newTonicArray.indexOf(element));
         });
-        //console.log(indexArray);
 
         let indexArrayFinal = [];
         for (let i = 0; i<indexArray.length; i++) {
-            if (indexArray[i] === 2 || indexArray[i] === 5 || indexArray[i] === 9) {
+            if (indexArray[i] === 2 || indexArray[i] === 5 || indexArray[i] === 6 || indexArray[i] === 9) {
                 indexArrayFinal.push(indexArray[i] + 12);
             } else {
                 indexArrayFinal.push(indexArray[i]);
             }
         }
-        //console.log(indexArrayFinal);
 
         // create final Numbers array
         let numbersArray = [];
         for (let i=0; i<indexArrayFinal.length; i++) {
             numbersArray.push(Object.keys(intervalsObject).find(key => intervalsObject[key] === indexArrayFinal[i]));
-            //if (indexArrayFinal[i] === Object.keys(intervalsObject).find())
         }
         return numbersArray;
     }
@@ -538,16 +408,22 @@ class jazzChordNumbers {
     }
 }
 
-let AbMaj13 = new jazzChord('Ab', 'maj').chordExtension('13');
+class jazzChordNotes {
+}
+
+
+
+/* tests for jazzChordNumbers
+let AbMaj13 = new jazzChord('ab', 'maj').chordExtension('13');
 let AbMaj13Numbers = new jazzChordNumbers(AbMaj13).numberGenerator();
-let AbMin13 = new jazzChord('Ab', '-').chordExtension('13');
+let AbMin13 = new jazzChord('ab', '-').chordExtension('13');
 let AbMin13Numbers = new jazzChordNumbers(AbMin13).numberGenerator();
 
 console.log(AbMaj13);
 console.log(AbMin13);
 console.log(AbMaj13Numbers);
 console.log(AbMin13Numbers);
-
+*/
 
 /* tests for chordExtension
 console.log(new jazzChord('c#', 'maj').chordExtension('7'));
@@ -593,5 +469,4 @@ console.log(new jazzChord('a#', 'min').chordGenerator());
 console.log(new jazzChord('bb', 'maj').chordGenerator());
 console.log(new jazzChord('bb', 'min').chordGenerator());
 console.log(new jazzChord('b', 'maj').chordGenerator());
-console.log(new jazzChord('b', 'min').chordGenerator());
-*/
+console.log(new jazzChord('b', 'min').chordGenerator() */
