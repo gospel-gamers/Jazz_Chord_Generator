@@ -183,39 +183,6 @@ class jazzChord {
     } else {
         //throw new Error('Not a valid chord input type');
     }
-    /*
-    // add chord extensions based on flavornotes
-    if (this.flavorNote && (this.chordType === 'maj' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + majorSeventh]);
-    } 
-    if (this.flavorNote === '9' && (this.chordType === 'maj' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-    } 
-    if (this.flavorNote === '11' && (this.chordType === 'maj' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-    } 
-    if (this.flavorNote === '13' && (this.chordType === 'maj' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-        chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
-    } 
-    if (this.flavorNote && (this.chordType === 'min' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + dimSeventh]);
-    } 
-    if (this.flavorNote === '9' && (this.chordType === 'min' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-    } 
-    if (this.flavorNote === '11' && (this.chordType === 'min' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-    } 
-    if (this.flavorNote === '13' && (this.chordType === 'min' || !this.chordType)) {
-        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
-        chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
-        chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
-    }
-    */
     return chordNotes;
   }
 
@@ -390,18 +357,120 @@ class jazzChordNumbers {
     }
     
     major9thVoicings() {
+        //let numbersArray = new jazzChordNumbers(this.array).numberGenerator();
+        let numbersArray = this.array;
+
+        // check if array contains a minor chord, hence the b3
+        let minorChordIndicator = numbersArray.find(value => value === 'b3');
+        if (minorChordIndicator) {
+            throw new Error('a major 9th voicing cannot be built with a minor chord');
+        }
+        if (numbersArray.length !== 5) {
+            throw new Error('these voicings only work with a 9th chord')
+        }
+
+        // create chord voicings
+        let openMaj9thVoicing = numbersArray;
+        let closedMaj9thVoicing = [].concat(numbersArray[0], numbersArray.slice(-2), numbersArray.slice(1, 3)) 
+        let drop5Maj9thVoicing = [].concat(closedMaj9thVoicing[0], closedMaj9thVoicing.slice(-1), closedMaj9thVoicing.slice(1, 4));
+
+        // return answer with string interpolation
+        return `${openMaj9thVoicing.join(' - ')} --> open Maj9th    ${closedMaj9thVoicing.join(' - ')} --> closed Maj9th    ${drop5Maj9thVoicing.join(' - ')} --> drop5 Maj9th
+        `;
+
+
     }
     
     minor9thVoicings() {
+        //let numbersArray = new jazzChordNumbers(this.array).numberGenerator();
+        let numbersArray = this.array;
+
+        // check if array contains a minor chord, hence the b3
+        let majorChordIndicator = numbersArray.find(value => value === '3');
+        if (majorChordIndicator) {
+            throw new Error('a min 9th voicing cannot be built with a major chord');
+        }
+        if (numbersArray.length !== 5) {
+            throw new Error('these voicings only work with a 9th chord')
+        }
+
+        // create chord voicings
+        let openMin9thVoicing = numbersArray;
+        let closedMin9thVoicing = [].concat(numbersArray[0], numbersArray.slice(-2), numbersArray.slice(1, 3)) 
+        let drop5Min9thVoicing = [].concat(closedMin9thVoicing[0], closedMin9thVoicing.slice(-1), closedMin9thVoicing.slice(1, 4));
+
+        // return answer with string interpolation
+        return `${openMin9thVoicing.join(' - ')} --> open Min9th    ${closedMin9thVoicing.join(' - ')} --> closed Min9th    ${drop5Min9thVoicing.join(' - ')} --> drop5 Min9th
+        `;
     }
     
     major11thVoicings() {
+        //let numbersArray = new jazzChordNumbers(this.array).numberGenerator();
+        let numbersArray = this.array;
+
+        // check if array contains a minor chord, hence the b3
+        let minorChordIndicator = numbersArray.find(value => value === 'b3');
+        if (minorChordIndicator) {
+            throw new Error('a major 11th voicing cannot be built with a minor chord');
+        }
+        if (numbersArray.length !== 6) {
+            throw new Error('these voicings only work with an 11th chord')
+        }
+
+        // create chord voicings
+        let openMaj11thVoicing = numbersArray;
+        let closedMaj11thVoicing = [].concat(numbersArray[0], numbersArray.slice(3, 5), numbersArray[1], numbersArray.slice(-1), numbersArray[2]) 
+        let kennyBarronMaj11thVoicing = [].concat(closedMaj11thVoicing[0], closedMaj11thVoicing.slice(-1), closedMaj11thVoicing.slice(2, 4), closedMaj11thVoicing[1], closedMaj11thVoicing[4]);
+
+        // return answer with string interpolation
+        return `${openMaj11thVoicing.join(' - ')} --> open Maj11th    ${closedMaj11thVoicing.join(' - ')} --> closed Maj11th    ${kennyBarronMaj11thVoicing.join(' - ')} --> Kenny Barron Maj11th
+        `;
     }
     
     minor11thVoicings() {
+        //let numbersArray = new jazzChordNumbers(this.array).numberGenerator();
+        let numbersArray = this.array;
+
+        // check if array contains a minor chord, hence the b3
+        let majorChordIndicator = numbersArray.find(value => value === '3');
+        if (majorChordIndicator) {
+            throw new Error('a minor 11th voicing cannot be built with a major chord');
+        }
+        if (numbersArray.length !== 6) {
+            throw new Error('these voicings only work with an 11th chord')
+        }
+
+        // create chord voicings
+        let openMin11thVoicing = numbersArray;
+        let closedMin11thVoicing = [].concat(numbersArray[0], numbersArray.slice(3, 5), numbersArray[1], numbersArray.slice(-1), numbersArray[2]) 
+        let kennyBarronMin11thVoicing = [].concat(closedMin11thVoicing[0], closedMin11thVoicing.slice(-1), closedMin11thVoicing.slice(2, 4), closedMin11thVoicing[1], closedMin11thVoicing[4]);
+        let herbieHanMin11thVoicing = [].concat(kennyBarronMin11thVoicing.lastIndexOf(0, 2), kennyBarronMin11thVoicing[3], kennyBarronMin11thVoicing.slice(-1), kennyBarronMin11thVoicing[4], kennyBarronMin11thVoicing[2]);
+
+        // return answer with string interpolation
+        return `${openMin11thVoicing.join(' - ')} --> open Min11th    ${closedMin11thVoicing.join(' - ')} --> closed Min11th    ${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    ${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th Voicing
+        `;
     }
     
     major13thVoicings() {
+        //let numbersArray = new jazzChordNumbers(this.array).numberGenerator();
+        let numbersArray = this.array;
+
+        // check if array contains a minor chord, hence the b3
+        let minorChordIndicator = numbersArray.find(value => value === 'b3');
+        if (minorChordIndicator) {
+            throw new Error('a major 11th voicing cannot be built with a minor chord');
+        }
+        if (numbersArray.length !== 7) {
+            throw new Error('these voicings only work with an 11th chord')
+        }
+
+        // create chord voicings
+        let openMaj13thVoicing = numbersArray;
+        let Maj13thNo11thVoicing = [].concat(openMaj13thVoicing.slice(0, 3), openMaj13thVoicing.slice(-1), openMaj13thVoicing.slice(3, 5), openMaj13thVoicing[1]);
+
+        // return answer with string interpolation
+        return `${openMaj13thVoicing.join(' - ')} --> open Maj13th    ${Maj13thNo11thVoicing.join(' - ')} --> Maj13thNo11th
+        `;
     }
     
     dominantVoicings() {
@@ -413,16 +482,25 @@ class jazzChordNotes {
 
 
 
-/* tests for jazzChordNumbers
-let AbMaj13 = new jazzChord('ab', 'maj').chordExtension('13');
+/* tests for voicings
+let AbMaj13 = new jazzChord('Ab', 'maj').chordExtension('11');
 let AbMaj13Numbers = new jazzChordNumbers(AbMaj13).numberGenerator();
-let AbMin13 = new jazzChord('ab', '-').chordExtension('13');
+let AbMin13 = new jazzChord('Ab', '-').chordExtension('11');
 let AbMin13Numbers = new jazzChordNumbers(AbMin13).numberGenerator();
 
 console.log(AbMaj13);
 console.log(AbMin13);
 console.log(AbMaj13Numbers);
 console.log(AbMin13Numbers);
+
+console.log(AbMaj13);
+console.log(AbMaj13Numbers);
+console.log(new jazzChordNumbers(AbMaj13).major11thVoicings());
+console.log(new jazzChordNumbers(AbMaj13Numbers).major11thVoicings());
+
+//console.log(new jazzChordNumbers(AbMin13).major9thVoicings());
+//console.log(new jazzChordNumbers(AbMin13).minor11thVoicings());
+//console.log(new jazzChordNumbers(AbMin13).major9thVoicings());
 */
 
 /* tests for chordExtension

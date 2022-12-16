@@ -21,6 +21,7 @@
 ***closed position***
 places root, 7 and 9 one octave lower ... how to implement this?:
 1, 7, 9, 3+oct/10, 5+oct/12
+1, 7, 9, 3, 5
 
 ***drop fifth inversion:***
 1, 5, 7, 9, 3/10  
@@ -43,8 +44,10 @@ open voicing:
 
  ***closed voicing***
 1, 7, 9, 3+oct/10, #11, 5
+1, 7, 9, 3, #11, 5
 
-***kenny Barum maj #11th voicing:***
+***Kenny Barron maj #11th voicing:***
+1, 5, 9, 3, 7, #11
 1, 5, 9, 3+oct/10, 7+oct, #11+oct
 
 **Minor 11th Voicing**
@@ -52,13 +55,18 @@ open voicing:
 1, b3, 5, b7, 9, 11
 for min 11th voicing, the natural 11th is used 
 
- ***Kenny Barum min voicing:***
+ ***Kenny Barron min voicing:***
+ 1, 5, 9, b3, b7, 11
  1, 5, 9, b3+oct/b10, b7+oct, 11+oct
 
+Add this Voicing!!
 ***So What Voicing***
+1, 4, b7, b3, 5
 1, 4, b7, b3+oct/b10, 5+oct/12
 
-***Herby Hancock voicing:***
+Add the natural 7 instead of b7!!
+***Herbie Hancock voicing:***
+1, 5, b3, 11, 7, 9
 1, 5, b3+oct/b10, 11, 7+oct, 9+oct
 
 **13th voicings:**
@@ -66,10 +74,12 @@ for min 11th voicing, the natural 11th is used
 **root / open voicing:**
 1, 3, 5, 7, 9, 11, 13
 **common voicing (No 11th):**
+1, 3, 5, 13, 7, 9, 3
 1, 3, 5, 6/13 , 7, 9, 3/10, 
 
 **Minor voicings:**
 not very common... due to dissonance
+
 
 **Dominant Chord Voicings:**
 in General 1, 3, 5, b7 ... etc
