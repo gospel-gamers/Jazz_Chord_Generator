@@ -142,14 +142,6 @@ class jazzChord {
         isSharp = true;
     } 
 
-    /* first approach at determining sharp or flat
-    if (combinedTonicArray[1] === 'b') {
-        isFlat = true;
-    } else {
-        isSharp = true;
-    }
-    */
-
     // generalize chord array to use
 
     let correctNotesArray = [];
@@ -217,6 +209,8 @@ class jazzChord {
     let isDom = false;
     let domArray = Array.from(flavorNote);
     let domString = domArray[0] + domArray[1] + domArray[2];
+    let domFlavorString = domArray.slice(3).join('');
+    //console.log(domFlavorString);
 
     if ((this.chordType === 'maj' || !this.chordType) && (domString === 'dom')) {
         isDom = true;
@@ -254,7 +248,7 @@ class jazzChord {
     // logic for adding chord extensions
 
     tonicIndex = correctNotesArray.indexOf(combinedTonicString);
-
+    // major chord extension
     if (flavorNote && isMaj) {
         chordNotes.push(correctNotesArray[tonicIndex + majorSeventh]);
     } 
@@ -270,6 +264,7 @@ class jazzChord {
         chordNotes.push(correctNotesArray[tonicIndex + aug11th]);
         chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
     } 
+    // minor chord extensions
     if (flavorNote && isMin) {
         chordNotes.push(correctNotesArray[tonicIndex + dimSeventh]);
     } 
@@ -285,10 +280,25 @@ class jazzChord {
         chordNotes.push(correctNotesArray[tonicIndex + perfect11th]);
         chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
     }
-    // TODO add logic for if domstring === 'dom', then create logic for dominant chord extensions
+    // dominant chord extensions 
+    if (flavorNote && isDom) {
+        chordNotes.push(correctNotesArray[tonicIndex +  dimSeventh]);
+    } 
+    if (domArray[3] === '9' && isDom) {
+        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
+    } 
+    if (domFlavorString === '11' && isDom) {
+        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
+        chordNotes.push(correctNotesArray[tonicIndex + aug11th]);
+    } 
+    if (domFlavorString === '13' && isDom) {
+        chordNotes.push(correctNotesArray[tonicIndex + maj9th]);
+        chordNotes.push(correctNotesArray[tonicIndex + aug11th]);
+        chordNotes.push(correctNotesArray[tonicIndex + maj13th]);
+    }
 
     return chordNotes;
-    
+
   }
 }
 
@@ -362,9 +372,18 @@ class jazzChordNumbers {
 
         // check if array contains a minor chord, hence the b3
         let minorChordIndicator = numbersArray.find(value => value === 'b3');
+
         if (minorChordIndicator) {
             throw new Error('a major 9th voicing cannot be built with a minor chord');
         }
+
+        // same but now whether it is Dominant
+        let dominantChordIndicator = numbersArray.find(value => value === 'b7');
+        if (dominantChordIndicator) {
+            throw new Error('a major 9th voicing cannot be built with a dominant chord');
+        }
+
+        // check if length of chord exceeds a 9th chord
         if (numbersArray.length !== 5) {
             throw new Error('these voicings only work with a 9th chord')
         }
@@ -388,7 +407,7 @@ class jazzChordNumbers {
         // check if array contains a minor chord, hence the b3
         let majorChordIndicator = numbersArray.find(value => value === '3');
         if (majorChordIndicator) {
-            throw new Error('a min 9th voicing cannot be built with a major chord');
+            throw new Error('a min 9th voicing cannot be built with a major or a dominant chord');
         }
         if (numbersArray.length !== 5) {
             throw new Error('these voicings only work with a 9th chord')
@@ -413,6 +432,13 @@ class jazzChordNumbers {
         if (minorChordIndicator) {
             throw new Error('a major 11th voicing cannot be built with a minor chord');
         }
+
+        // same but with a dominant chord
+        let dominantChordIndicator = numbersArray.find(value => value === 'b7');
+        if (dominantChordIndicator) {
+            throw new Error('a major 11th voicing cannot be built with a dominant chord');
+        }
+
         if (numbersArray.length !== 6) {
             throw new Error('these voicings only work with an 11th chord')
         }
@@ -458,10 +484,15 @@ class jazzChordNumbers {
         // check if array contains a minor chord, hence the b3
         let minorChordIndicator = numbersArray.find(value => value === 'b3');
         if (minorChordIndicator) {
-            throw new Error('a major 11th voicing cannot be built with a minor chord');
+            throw new Error('a major 13jth voicing cannot be built with a minor chord');
+        }
+        // same but for a dominant chord
+        let dominantChordIndicator = numbersArray.find(value => value === 'b7');
+        if (dominantChordIndicator) {
+            throw new Error('a major 13th voicing cannot be built with a dominant chord');
         }
         if (numbersArray.length !== 7) {
-            throw new Error('these voicings only work with an 11th chord')
+            throw new Error('these voicings only work with an 13th chord')
         }
 
         // create chord voicings
@@ -473,7 +504,39 @@ class jazzChordNumbers {
         `;
     }
     
-    dominantVoicings() {
+    dominant13thVoicings() {
+        let numbersArray = this.array;
+
+        // check if array contains a minor chord, hence the b3
+        let minorChordIndicator = numbersArray.find(value => value === 'b3');
+        if (minorChordIndicator) {
+            throw new Error('a dominant 13th voicing cannot be built with a minor chord');
+        }
+        // same but for a dominant chord
+        let dominantChordIndicator = numbersArray.find(value => value === '7');
+        if (dominantChordIndicator) {
+            throw new Error('a dominant 13th voicing cannot be built with a major chord');
+        }
+        if (numbersArray.length !== 7) {
+            throw new Error('these voicings only work with an 13th chord')
+        }
+
+        // create chord voicings
+        let openDom13thVoicing = numbersArray;
+
+        let Dom13thVoicing1 = [].concat(openDom13thVoicing[0], openDom13thVoicing[2], openDom13thVoicing[1], openDom13thVoicing.slice(-1), openDom13thVoicing.slice(3, 5));
+
+        let Dom13thVoicing2 = [].concat(Dom13thVoicing1[0], Dom13thVoicing1[2], Dom13thVoicing1.slice(-2), Dom13thVoicing1[3]);
+
+        let Dom13thVoicing3 = [].concat(Dom13thVoicing2[0], Dom13thVoicing2[2], Dom13thVoicing2[1], Dom13thVoicing2.slice(-1), Dom13thVoicing2.slice(-2, -1));
+
+        let Dom13thVoicing4 = [].concat(Dom13thVoicing3.slice(0, 4), Dom13thVoicing3[0]);
+
+        let upperStructureTriad = [].concat(Dom13thVoicing2.slice(0, 4), openDom13thVoicing.slice(-2));
+
+        // return answer with string interpolation
+        return `${openDom13thVoicing.join(' - ')} --> open Dom13th    ${Dom13thVoicing1.join(' - ')} --> dom13thVoicing1    ${Dom13thVoicing2.join(' - ')} --> dom13thVoicing2    ${Dom13thVoicing3.join(' - ')} --> dom13thVoicing3    ${Dom13thVoicing4.join(' - ')} --> dom13thVoicing4    ${upperStructureTriad.join(' - ')} --> Upper Structure Triad
+        `;
     }
 }
 
@@ -482,37 +545,41 @@ class jazzChordNotes {
 
 
 
-/* tests for voicings
-let AbMaj13 = new jazzChord('Ab', 'maj').chordExtension('11');
+/*
+let AbDom13 = new jazzChord('Ab', 'maj').chordExtension('dom13');
+let AbDom13Numbers = new jazzChordNumbers(AbDom13).numberGenerator();
+
+console.log(AbDom13);
+console.log(AbDom13Numbers);
+console.log(new jazzChordNumbers(AbDom13).dominant13thVoicings());
+console.log(new jazzChordNumbers(AbDom13Numbers).dominant13thVoicings());
+
+/*
+let AbMaj13 = new jazzChord('Ab', 'maj').chordExtension('13');
 let AbMaj13Numbers = new jazzChordNumbers(AbMaj13).numberGenerator();
-let AbMin13 = new jazzChord('Ab', '-').chordExtension('11');
-let AbMin13Numbers = new jazzChordNumbers(AbMin13).numberGenerator();
 
+console.log(AbDom13);
 console.log(AbMaj13);
-console.log(AbMin13);
+console.log(AbDom13Numbers);
 console.log(AbMaj13Numbers);
-console.log(AbMin13Numbers);
+*/
 
-console.log(AbMaj13);
-console.log(AbMaj13Numbers);
-console.log(new jazzChordNumbers(AbMaj13).major11thVoicings());
-console.log(new jazzChordNumbers(AbMaj13Numbers).major11thVoicings());
 
 //console.log(new jazzChordNumbers(AbMin13).major9thVoicings());
 //console.log(new jazzChordNumbers(AbMin13).minor11thVoicings());
 //console.log(new jazzChordNumbers(AbMin13).major9thVoicings());
-*/
 
-/* tests for chordExtension
-console.log(new jazzChord('c#', 'maj').chordExtension('7'));
-console.log(new jazzChord('c#', 'maj').chordExtension('9'));
-console.log(new jazzChord('c#', 'maj').chordExtension('11'));
-console.log(new jazzChord('c#', 'maj').chordExtension('13'));
 
-console.log(new jazzChord('c#', 'min').chordExtension('7'));
-console.log(new jazzChord('c#', 'min').chordExtension('9'));
-console.log(new jazzChord('c#', 'min').chordExtension('11'));
-console.log(new jazzChord('c#', 'min').chordExtension('13'));
+/* test for chord extensions
+console.log(new jazzChord('c', 'maj').chordExtension('dom'));
+console.log(new jazzChord('c', 'maj').chordExtension('dom9'));
+console.log(new jazzChord('c', 'maj').chordExtension('dom11'));
+console.log(new jazzChord('c', 'maj').chordExtension('dom13'));
+
+console.log(new jazzChord('c', 'min').chordExtension('7'));
+console.log(new jazzChord('c', 'min').chordExtension('9'));
+console.log(new jazzChord('c', 'min').chordExtension('11'));
+console.log(new jazzChord('c', 'min').chordExtension('13'));
 */
 
 /* tests for chordGenerator
@@ -547,4 +614,5 @@ console.log(new jazzChord('a#', 'min').chordGenerator());
 console.log(new jazzChord('bb', 'maj').chordGenerator());
 console.log(new jazzChord('bb', 'min').chordGenerator());
 console.log(new jazzChord('b', 'maj').chordGenerator());
-console.log(new jazzChord('b', 'min').chordGenerator() */
+console.log(new jazzChord('b', 'min').chordGenerator() 
+*/

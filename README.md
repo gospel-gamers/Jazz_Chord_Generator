@@ -84,19 +84,22 @@ not very common... due to dissonance
 **Dominant Chord Voicings:**
 in General 1, 3, 5, b7 ... etc
 ***root position:***
-1, 3, 5, b7, 9 ...etc
+1, 3, 5, b7, 9, #11, 13
 
 ***nice colorful inversion 1:***
 1, 5, 3/10, 6+oct/13, b7+oct, 9+oct
+1, 5, 3, 13, b7, 9
 
 ***nice colorful inversion 2:***
 1, 3, b7, 9, 13
 
 **nice colorful inversion 3:***
 1, b7, 3/10, 6/13, 9+oct
+1, b7, 3, 13, 9
 
 ***nice colorful inversion 4:***
 1, b7, 3/10, 6/13, 8+oct
+1, b7, 3, 13, 8
 
 ***nice colorful inversion 5 / "Upper Structure Triad":***
 1, 3, b7, 9, #11, 13
