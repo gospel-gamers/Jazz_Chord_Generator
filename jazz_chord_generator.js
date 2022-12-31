@@ -181,7 +181,7 @@ class jazzChord {
   chordExtension(flavorNote) {
 
     // create chordNotes array to work with
-    let chordNotes = new jazzChord(this.tonic, this.chordType).chordGenerator();
+    let chordNotes = this.chordGenerator(); // simpler version than... let chordNotes = new jazzChord(this.tonic, this.chordType).chordGenerator();
 
     // definitons of variables and arrays/strings to use upper or lowercase input
     let upperCaseTonic = changeToUpperCase(this.tonic);
@@ -394,7 +394,7 @@ class jazzChordNumbers {
         let drop5Maj9thVoicing = [].concat(closedMaj9thVoicing[0], closedMaj9thVoicing.slice(-1), closedMaj9thVoicing.slice(1, 4));
 
         // return answer with string interpolation
-        return `${openMaj9thVoicing.join(' - ')} --> open Maj9th    ${closedMaj9thVoicing.join(' - ')} --> closed Maj9th    ${drop5Maj9thVoicing.join(' - ')} --> drop5 Maj9th
+        return `${openMaj9thVoicing.join(' - ')} --> open Maj9th    \n${closedMaj9thVoicing.join(' - ')} --> closed Maj9th    \n${drop5Maj9thVoicing.join(' - ')} --> drop5 Maj9th
         `;
 
 
@@ -419,7 +419,7 @@ class jazzChordNumbers {
         let drop5Min9thVoicing = [].concat(closedMin9thVoicing[0], closedMin9thVoicing.slice(-1), closedMin9thVoicing.slice(1, 4));
 
         // return answer with string interpolation
-        return `${openMin9thVoicing.join(' - ')} --> open Min9th    ${closedMin9thVoicing.join(' - ')} --> closed Min9th    ${drop5Min9thVoicing.join(' - ')} --> drop5 Min9th
+        return `${openMin9thVoicing.join(' - ')} --> open Min9th    \n${closedMin9thVoicing.join(' - ')} --> closed Min9th    \n${drop5Min9thVoicing.join(' - ')} --> drop5 Min9th
         `;
     }
     
@@ -449,7 +449,7 @@ class jazzChordNumbers {
         let kennyBarronMaj11thVoicing = [].concat(closedMaj11thVoicing[0], closedMaj11thVoicing.slice(-1), closedMaj11thVoicing.slice(2, 4), closedMaj11thVoicing[1], closedMaj11thVoicing[4]);
 
         // return answer with string interpolation
-        return `${openMaj11thVoicing.join(' - ')} --> open Maj11th    ${closedMaj11thVoicing.join(' - ')} --> closed Maj11th    ${kennyBarronMaj11thVoicing.join(' - ')} --> Kenny Barron Maj11th
+        return `${openMaj11thVoicing.join(' - ')} --> open Maj11th    \n${closedMaj11thVoicing.join(' - ')} --> closed Maj11th    \n${kennyBarronMaj11thVoicing.join(' - ')} --> Kenny Barron Maj11th
         `;
     }
     
@@ -473,7 +473,7 @@ class jazzChordNumbers {
         let herbieHanMin11thVoicing = [].concat(kennyBarronMin11thVoicing.lastIndexOf(0, 2), kennyBarronMin11thVoicing[3], kennyBarronMin11thVoicing.slice(-1), kennyBarronMin11thVoicing[4], kennyBarronMin11thVoicing[2]);
 
         // return answer with string interpolation
-        return `${openMin11thVoicing.join(' - ')} --> open Min11th    ${closedMin11thVoicing.join(' - ')} --> closed Min11th    ${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    ${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th Voicing
+        return `${openMin11thVoicing.join(' - ')} --> open Min11th    \n${closedMin11thVoicing.join(' - ')} --> closed Min11th    \n${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    \n${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th Voicing
         `;
     }
     
@@ -500,7 +500,7 @@ class jazzChordNumbers {
         let Maj13thNo11thVoicing = [].concat(openMaj13thVoicing.slice(0, 3), openMaj13thVoicing.slice(-1), openMaj13thVoicing.slice(3, 5), openMaj13thVoicing[1]);
 
         // return answer with string interpolation
-        return `${openMaj13thVoicing.join(' - ')} --> open Maj13th    ${Maj13thNo11thVoicing.join(' - ')} --> Maj13thNo11th
+        return `${openMaj13thVoicing.join(' - ')} --> open Maj13th    \n${Maj13thNo11thVoicing.join(' - ')} --> Maj13thNo11th
         `;
     }
     
@@ -535,33 +535,127 @@ class jazzChordNumbers {
         let upperStructureTriad = [].concat(Dom13thVoicing2.slice(0, 4), openDom13thVoicing.slice(-2));
 
         // return answer with string interpolation
-        return `${openDom13thVoicing.join(' - ')} --> open Dom13th    ${Dom13thVoicing1.join(' - ')} --> dom13thVoicing1    ${Dom13thVoicing2.join(' - ')} --> dom13thVoicing2    ${Dom13thVoicing3.join(' - ')} --> dom13thVoicing3    ${Dom13thVoicing4.join(' - ')} --> dom13thVoicing4    ${upperStructureTriad.join(' - ')} --> Upper Structure Triad
+        return `${openDom13thVoicing.join(' - ')} --> open Dom13th    \n${Dom13thVoicing1.join(' - ')} --> dom13thVoicing1    \n${Dom13thVoicing2.join(' - ')} --> dom13thVoicing2    \n${Dom13thVoicing3.join(' - ')} --> dom13thVoicing3    \n${Dom13thVoicing4.join(' - ')} --> dom13thVoicing4    \n${upperStructureTriad.join(' - ')} --> Upper Structure Triad
         `;
     }
 }
 
-class jazzChordNotes {
+
+// prompts for user to interact with :D
+// define prompt
+const prompt = require('prompt-sync')();
+
+const whatNoteQ = prompt('What note will be your tonic note? Type # for sharps and b for flats.');
+const whatChordQ = prompt('Do you want a major, minor, augmented or diminished chord? Type maj or press enter for major, type min or - for minor, type aug or + for augmented and dim or ° for diminished.');
+
+let wantChordExtension = false;
+const wantChordExtQ = prompt('Do you want to add jazzy chord extensions to your major or minor chord? Type yes if so, and type no if not.')
+
+if (wantChordExtQ === 'yes') {
+    wantChordExtension = true;
+}
+
+let whatFlavorNoteQ;
+if (wantChordExtension) {
+    let wantVoicings = false;
+    let wantNumbers = false;
+    let wantNotes = false;
+    let w;
+
+    if (whatChordQ === 'maj') {
+        whatFlavorNoteQ = prompt('Would you like to make your chord a major 7th, 9th, 11th or 13th chord or possibly a dominant 7th, 9th, 11th or 13th chord? Type 7, 9, 11, or 13 for major chord extensions and dom7, dom9, dom11 or dom13 for dominant extensions.')
+        
+        let wantVoicingsQ = prompt('Do you want sexy voicings or inversions with your chord extension? Type yes if so and no if not.');
+        if (wantVoicingsQ === 'yes') {
+            wantVoicings = true;
+        } else {
+            wantVoicings = false;
+        }
+        
+        let wantNumbersQ = prompt('Do you want your chord and voicings in notes, numbers or both? Type notes, numbers or both respectively.');
+        if (wantNumbersQ === 'notes') {
+            wantNotes = true;
+        } else if (wantNumbersQ === 'numbers') {
+            wantNumbers = true;
+        } else {
+            wantNotes = true;
+            wantNumbers = true;
+        }
+
+        // determine what chord and or voicings to spit out
+        if (!wantVoicings) {
+            return console.log(new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ));
+        } else if (wantVoicings && wantNotes && !wantNumbers) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).numberGenerator());
+        } else if (wantVoicings && !wantNotes && wantNumbers) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).numberGenerator());
+        } else {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).numberGenerator());
+        }
+        
+    } else if (whatChordQ === 'min') {
+        whatFlavorNoteQ = prompt('Do you want notes, numbers or both with your minor chord extensions? Type notes, numbers or both respectively.');
+
+        let wantVoicingsQ = prompt('Do you want sexy voicings or inversions with your chord extension? Type yes if so and no if not.');
+        if (wantVoicingsQ === 'yes') {
+            wantVoicings = true;
+        } else {
+            wantVoicings = false;
+        }
+        
+        let wantNumbersQ = prompt('Do you want your chord and voicings in notes, numbers or both? Type notes, numbers or both respectively.');
+        if (wantNumbersQ === 'notes') {
+            wantNotes = true;
+        } else if (wantNumbersQ === 'numbers') {
+            wantNumbers = true;
+        } else {
+            wantNotes = true;
+            wantNumbers = true;
+        }
+
+        // determine what chord and or voicings to spit out
+        if (!wantVoicings) {
+            return console.log(new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ));
+        } else if (wantVoicings && wantNotes && !wantNumbers) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).numberGenerator());
+        } else if (wantVoicings && !wantNotes && wantNumbers) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).numberGenerator());
+        } else {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).numberGenerator());
+        }
+    }
+} else {
+    return console.log(new jazzChord(whatNoteQ, whatChordQ));
 }
 
 
 
+
+
+
+
+// console log tests
 /*
 let AbDom13 = new jazzChord('Ab', 'maj').chordExtension('dom13');
 let AbDom13Numbers = new jazzChordNumbers(AbDom13).numberGenerator();
 
-console.log(AbDom13);
-console.log(AbDom13Numbers);
 console.log(new jazzChordNumbers(AbDom13).dominant13thVoicings());
 console.log(new jazzChordNumbers(AbDom13Numbers).dominant13thVoicings());
 
-/*
+
 let AbMaj13 = new jazzChord('Ab', 'maj').chordExtension('13');
 let AbMaj13Numbers = new jazzChordNumbers(AbMaj13).numberGenerator();
 
-console.log(AbDom13);
-console.log(AbMaj13);
-console.log(AbDom13Numbers);
-console.log(AbMaj13Numbers);
+console.log(AbDom13.join(' - '));
+console.log(AbMaj13.join(' - '));
+console.log(AbDom13Numbers.join(' - '));
+console.log(AbMaj13Numbers.join(' - '));
 */
 
 
