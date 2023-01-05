@@ -1,13 +1,19 @@
 // sharp and flat arrays
 
-let notesArraySharp = 
+const notesArraySharp = 
 [
   'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'
 ];
 
-let notesArrayFlat = 
+const notesArrayFlat = 
 [
   'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A'
+];
+
+// numbers Interval Array
+const numbersIntervalArr = 
+[
+    '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13', '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13', '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13', '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13'
 ];
 
 // change to uppercase function
@@ -471,10 +477,38 @@ class jazzChordNumbers {
         let openMin11thVoicing = numbersArray;
         let closedMin11thVoicing = [].concat(numbersArray[0], numbersArray.slice(3, 5), numbersArray[1], numbersArray.slice(-1), numbersArray[2]) 
         let kennyBarronMin11thVoicing = [].concat(closedMin11thVoicing[0], closedMin11thVoicing.slice(-1), closedMin11thVoicing.slice(2, 4), closedMin11thVoicing[1], closedMin11thVoicing[4]);
-        let herbieHanMin11thVoicing = [].concat(kennyBarronMin11thVoicing.slice(0, 2), kennyBarronMin11thVoicing[3], kennyBarronMin11thVoicing.slice(-1), kennyBarronMin11thVoicing[4], kennyBarronMin11thVoicing[2]);
 
+        // Herbie Hancock Voicing 
+        const tonic = numbersArray[0];
+        let tonicIndex;
+        let naturalSev;
+        let perfectFour;
+
+        // determine if it's a note or number value
+        if (Number(tonic)) {
+            tonicIndex = numbersIntervalArr.indexOf(tonic);
+            naturalSev = numbersIntervalArr[tonicIndex+11];
+        } else {
+            tonicIndex = notesArraySharp.indexOf(tonic);
+            naturalSev = notesArraySharp[tonicIndex+11];
+        }
+
+        // logs for testing
+        //console.log(`tonicIndex: ${tonicIndex}`);
+        //console.log(`naturalSev: ${naturalSev}`);
+
+        let herbieHanMin11thVoicing = [].concat(kennyBarronMin11thVoicing.slice(0, 2), kennyBarronMin11thVoicing[3], kennyBarronMin11thVoicing.slice(-1), naturalSev, kennyBarronMin11thVoicing[2]);
+
+        // So What voicing
+        if (Number(tonic)) {
+            perfectFour = numbersIntervalArr[tonicIndex+5];
+        } else {
+            perfectFour = notesArraySharp[tonicIndex+5];
+        }
+        let soWhatMin11thVoicing = [].concat(tonic, perfectFour, numbersArray[3], numbersArray[1], numbersArray[2]);
+        
         // return answer with string interpolation
-        return `${openMin11thVoicing.join(' - ')} --> open Min11th    \n${closedMin11thVoicing.join(' - ')} --> closed Min11th    \n${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    \n${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th Voicing
+        return `${openMin11thVoicing.join(' - ')} --> open Min11th    \n${closedMin11thVoicing.join(' - ')} --> closed Min11th    \n${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    \n${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th    \n${soWhatMin11thVoicing.join(' - ')} --> So What Min11th Voicing
         `;
     }
     
@@ -547,8 +581,8 @@ class jazzChordNumbers {
 const prompt = require('prompt-sync')();
 
 // prompts to determine starting note and chord type
-const whatNoteQ = prompt('What note will be your tonic note? Type # for sharps and b for flats.');
-const whatChordQ = prompt('Do you want a major, minor, augmented or diminished chord? Type maj or press enter for major, type min or - for minor, type aug or + for augmented and dim or ° for diminished.');
+const whatNoteQ = prompt('What note will be your tonic note? Type # for sharps and b for flats.\n');
+const whatChordQ = prompt('Do you want a major, minor, augmented or diminished chord? Type maj or press enter for major, type min or - for minor, type aug or + for augmented and dim or ° for diminished.\n');
 
 // return chords if they are augmented or diminished
 if (whatChordQ === 'aug' || whatChordQ === '+' || whatChordQ === 'dim' || whatChordQ === '°') {
@@ -557,7 +591,7 @@ if (whatChordQ === 'aug' || whatChordQ === '+' || whatChordQ === 'dim' || whatCh
 
 // prompt and logic to see if chord extensions are desired, if not then return the chord
 //let wantChordExtension = false;
-const wantChordExtQ = prompt('Do you want to add jazzy chord extensions to your major or minor chord? Type yes if so, and type no if not.')
+const wantChordExtQ = prompt('Do you want to add jazzy chord extensions to your major or minor chord? Type yes if so, and type no if not.\n')
 
 if (wantChordExtQ !== 'yes') {
     return console.log(new jazzChord(whatNoteQ, whatChordQ).chordGenerator().join(' - '));
@@ -574,10 +608,10 @@ let wantNotes = false;
 
 // logic for major / dominant chord extensions and then for minor chord extensions
 if (whatChordQ === 'maj' || !whatChordQ) {
-    whatFlavorNoteQ = prompt('Would you like to make your current major triad chord a major 7th, 9th, 11th or 13th chord or possibly a dominant 13th chord? Type 7, 9, 11, 13 or dom13 respectively.')
+    whatFlavorNoteQ = prompt('Would you like to make your current major triad chord a major 7th, 9th, 11th or 13th chord or possibly a dominant 13th chord? Type 7, 9, 11, 13 or dom13 respectively.\n')
     
     // determine if voicings are wanted, if not then return the chord
-    let wantVoicingsQ = prompt('Do you want additional smooth voicings with your chord extension? Type yes if so and no if not.');
+    let wantVoicingsQ = prompt('Do you want additional smooth voicings with your chord extension? Type yes if so and no if not.\n');
     if (wantVoicingsQ === 'yes') {
         wantVoicings = true;
     } else {
@@ -589,7 +623,7 @@ if (whatChordQ === 'maj' || !whatChordQ) {
     }
 
     // determine if notes, numbers or both are wanted
-    let wantNotesOrNumbersQ = prompt('Do you want your chord voicings in notes, numbers or both? Type notes, numbers or both respectively.');
+    let wantNotesOrNumbersQ = prompt('Do you want your chord voicings in notes, numbers or both? Type notes, numbers or both respectively.\n');
     if (wantNotesOrNumbersQ === 'notes') {
         wantNotes = true;
     } else if (wantNotesOrNumbersQ === 'numbers') {
@@ -674,10 +708,10 @@ if (whatChordQ === 'maj' || !whatChordQ) {
     }
 
 } else if (whatChordQ === 'min' || whatChordQ === '-') {
-    whatFlavorNoteQ = prompt('Would you like to make your minor chord triad a minor 7th, 9th or 11th chord? Type 7, 9, or 11 respectively.')
+    whatFlavorNoteQ = prompt('Would you like to make your current minor triad chord a minor 7th, 9th or 11th chord? Type 7, 9, or 11 respectively.\n')
     
     // determine if voicings are wanted, if not then return the chord
-    let wantVoicingsQ = prompt('Do you want additional smooth voicings along with your chord extension? Type yes if so and no if not.');
+    let wantVoicingsQ = prompt('Do you want additional smooth voicings along with your chord extension? Type yes if so and no if not.\n');
     if (wantVoicingsQ === 'yes') {
         wantVoicings = true;
     } else {
@@ -689,7 +723,7 @@ if (whatChordQ === 'maj' || !whatChordQ) {
     }
 
     // determine if notes, numbers or both are wanted
-    let wantNotesOrNumbersQ = prompt('Do you want your chord voicings in notes, numbers or both? Type notes, numbers or both respectively.');
+    let wantNotesOrNumbersQ = prompt('Do you want your chord voicings in notes, numbers or both? Type notes, numbers or both respectively.\n');
     if (wantNotesOrNumbersQ === 'notes') {
         wantNotes = true;
     } else if (wantNotesOrNumbersQ === 'numbers') {
