@@ -59,7 +59,7 @@ for min 11th voicing, the natural 11th is used
  1, 5, 9, b3, b7, 11
  1, 5, 9, b3+oct/b10, b7+oct, 11+oct
 
-Add this Voicing!!
+**Add this Voicing!!**
 ***So What Voicing***
 1, 4, b7, b3, 5
 1, 4, b7, b3+oct/b10, 5+oct/12
