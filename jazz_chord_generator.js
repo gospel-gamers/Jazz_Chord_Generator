@@ -1,13 +1,19 @@
 // sharp and flat arrays
 
-let notesArraySharp = 
+const notesArraySharp = 
 [
   'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'
 ];
 
-let notesArrayFlat = 
+const notesArrayFlat = 
 [
   'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A'
+];
+
+// numbers Interval Array
+const numbersIntervalArr = 
+[
+    '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13', '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13', '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13', '1', 'b2', '2', 'b3', '3', '4', 'b5', '5', 'b6', '6', 'b7', '7', '8', 'b9', '9', 'b10', '10', '11', '#11', '12', 'b13', '13'
 ];
 
 // change to uppercase function
@@ -467,13 +473,42 @@ class jazzChordNumbers {
         }
 
         // create chord voicings
+        // TODO fix herbie hancock 7th note && add 'So What' voicing
         let openMin11thVoicing = numbersArray;
         let closedMin11thVoicing = [].concat(numbersArray[0], numbersArray.slice(3, 5), numbersArray[1], numbersArray.slice(-1), numbersArray[2]) 
         let kennyBarronMin11thVoicing = [].concat(closedMin11thVoicing[0], closedMin11thVoicing.slice(-1), closedMin11thVoicing.slice(2, 4), closedMin11thVoicing[1], closedMin11thVoicing[4]);
-        let herbieHanMin11thVoicing = [].concat(kennyBarronMin11thVoicing.lastIndexOf(0, 2), kennyBarronMin11thVoicing[3], kennyBarronMin11thVoicing.slice(-1), kennyBarronMin11thVoicing[4], kennyBarronMin11thVoicing[2]);
 
+        // Herbie Hancock Voicing 
+        const tonic = numbersArray[0];
+        let tonicIndex;
+        let naturalSev;
+        let perfectFour;
+
+        // determine if it's a note or number value
+        if (Number(tonic)) {
+            tonicIndex = numbersIntervalArr.indexOf(tonic);
+            naturalSev = numbersIntervalArr[tonicIndex+11];
+        } else {
+            tonicIndex = notesArraySharp.indexOf(tonic);
+            naturalSev = notesArraySharp[tonicIndex+11];
+        }
+
+        // logs for testing
+        //console.log(`tonicIndex: ${tonicIndex}`);
+        //console.log(`naturalSev: ${naturalSev}`);
+
+        let herbieHanMin11thVoicing = [].concat(kennyBarronMin11thVoicing.slice(0, 2), kennyBarronMin11thVoicing[3], kennyBarronMin11thVoicing.slice(-1), naturalSev, kennyBarronMin11thVoicing[2]);
+
+        // So What voicing
+        if (Number(tonic)) {
+            perfectFour = numbersIntervalArr[tonicIndex+5];
+        } else {
+            perfectFour = notesArraySharp[tonicIndex+5];
+        }
+        let soWhatMin11thVoicing = [].concat(tonic, perfectFour, numbersArray[3], numbersArray[1], numbersArray[2]);
+        
         // return answer with string interpolation
-        return `${openMin11thVoicing.join(' - ')} --> open Min11th    \n${closedMin11thVoicing.join(' - ')} --> closed Min11th    \n${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    \n${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th Voicing
+        return `${openMin11thVoicing.join(' - ')} --> open Min11th    \n${closedMin11thVoicing.join(' - ')} --> closed Min11th    \n${kennyBarronMin11thVoicing.join(' - ')} --> Kenny Barron Min11th    \n${herbieHanMin11thVoicing.join(' - ')} --> Herbie Hancock Min11th    \n${soWhatMin11thVoicing.join(' - ')} --> So What Min11th Voicing
         `;
     }
     
@@ -546,187 +581,214 @@ class jazzChordNumbers {
 const prompt = require('prompt-sync')();
 
 // prompts to determine starting note and chord type
-const whatNoteQ = prompt('What note will be your tonic note? Type # for sharps and b for flats.');
-const whatChordQ = prompt('Do you want a major, minor, augmented or diminished chord? Type maj or press enter for major, type min or - for minor, type aug or + for augmented and dim or ° for diminished.');
+const whatNoteQ = prompt('What note will be your tonic note? Type # for sharps and b for flats.\n');
+const whatChordQ = prompt('Do you want a major, minor, augmented or diminished chord? Type maj or press enter for major, type min or - for minor, type aug or + for augmented and dim or ° for diminished.\n');
+
+// return chords if they are augmented or diminished
+if (whatChordQ === 'aug' || whatChordQ === '+' || whatChordQ === 'dim' || whatChordQ === '°') {
+    return console.log(new jazzChord(whatNoteQ, whatChordQ).chordGenerator().join(' - '));
+}
 
 // prompt and logic to see if chord extensions are desired, if not then return the chord
-let wantChordExtension = false;
-const wantChordExtQ = prompt('Do you want to add jazzy chord extensions to your major or minor chord? Type yes if so, and type no if not.')
+//let wantChordExtension = false;
+const wantChordExtQ = prompt('Do you want to add jazzy chord extensions to your major or minor chord? Type yes if so, and type no if not.\n')
 
-if (wantChordExtQ === 'yes') {
-    wantChordExtension = true;
-} else {
+if (wantChordExtQ !== 'yes') {
     return console.log(new jazzChord(whatNoteQ, whatChordQ).chordGenerator().join(' - '));
 }
 
 // logic to determine which chord extension and what voicings to use
+
+// declare variables
 let whatFlavorNoteQ;
-if (wantChordExtension) {
-    let wantVoicings = false;
-    let wantNumbers = false;
-    let wantNotes = false;
-    // let w;
+let wantVoicings = false;
+let wantNumbers = false;
+let wantNotes = false;
+// let w;
 
-    // logic for major / dominant chord extensions and then for minor chord extensions
-    if (whatChordQ === 'maj') {
-        whatFlavorNoteQ = prompt('Would you like to make your chord a major 7th, 9th, 11th or 13th chord or possibly a dominant 13th chord? Type 7, 9, 11, 13 or dom13 respectively.')
-        
-        // determine if voicings are wanted, if not then return the chord
-        let wantVoicingsQ = prompt('Do you want smooth voicings/inversions with your chord extension? Type yes if so and no if not.');
-        if (wantVoicingsQ === 'yes') {
-            wantVoicings = true;
-        } else {
-            wantVoicings = false;
-        }
-
-        if (!wantVoicings) {
-            return console.log(new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ).join(' - '));
-        }
-
-        // determine if notes, numbers or both are wanted
-        let wantNotesOrNumbersQ = prompt('Do you want your chord voicings/inversions in notes or numbers? Type notes or numbers respectively.');
-        if (wantNotesOrNumbersQ === 'notes') {
-            wantNotes = true;
-        } else if (wantNotesOrNumbersQ === 'numbers') {
-            wantNumbers = true;
-        } /*else {
-            wantNotes = true;
-            wantNumbers = true;
-        } */
-
-        // booleans to determine which chord voicings should be spit out using an object;
-        let maj7thChord = false;
-        let maj9thChord = false;
-        let maj11thChord = false;
-        let maj13thChord = false;
-        let dom13thChord = false;
-
-        // logic for determining which voicings to use
-        whatFlavorNoteQ === '7' ? maj7thChord = true : whatFlavorNoteQ === '9' ? maj9thChord = true : whatFlavorNoteQ === '11' ? maj11thChord = true : whatFlavorNoteQ === '13' ? maj13thChord = true : dom13thChord = true; 
-
-        // spits out voicings with notes, numbers or both
-        if (wantNotes) {
-            if (maj7thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(chord);
-            } else if (maj9thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).major9thVoicings());
-            } else if (maj11thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).major11thVoicings());
-            } else if (maj13thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).major13thVoicings());
-            } else {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).dominant13thVoicings());
-            }
-        }  
-        
-        if (wantNumbers) {
-            if (maj7thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return new jazzChordNumbers(chord).numberGenerator();
-            } else if (maj9thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).major9thVoicings());
-            } else if (maj11thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).major11thVoicings());
-            } else if (maj13thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).major13thVoicings());
-            } else {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).dominant13thVoicings());
-            }
-        } 
-        /*else {
-            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-            return console.log(new jazzChordNumbers(chord).numberGenerator());
-        }*/
-        
-    } else if (whatChordQ === 'min') {
-        whatFlavorNoteQ = prompt('Would you like to make your chord a minor 7th, 9th, 11th or 13th chord? Type 7, 9, 11, or 13 respectively.')
-        
-        // determine if voicings are wanted, if not then return the chord
-        let wantVoicingsQ = prompt('Do you want smooth voicings/inversions with your chord extension? Type yes if so and no if not.');
-        if (wantVoicingsQ === 'yes') {
-            wantVoicings = true;
-        } else {
-            wantVoicings = false;
-        }
-
-        if (!wantVoicings) {
-            return console.log(new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ).join(' - '));
-        }
-
-        // determine if notes, numbers or both are wanted
-        let wantNotesOrNumbersQ = prompt('Do you want your chord voicings/inversions in notes or numbers? Type notes or numbers respectively.');
-        if (wantNotesOrNumbersQ === 'notes') {
-            wantNotes = true;
-        } else if (wantNotesOrNumbersQ === 'numbers') {
-            wantNumbers = true;
-        } /*else {
-            wantNotes = true;
-            wantNumbers = true;
-        } */
-
-        // booleans to determine which chord voicings should be spit out using an object;
-        let min7thChord = false;
-        let min9thChord = false;
-        let min11thChord = false;
-        let min13thChord = false;
-
-        // logic for determining which voicings to use
-        // TODO fix minor 13th settings
-
-        whatFlavorNoteQ === '7' ? min7thChord = true : whatFlavorNoteQ === '9' ? min9thChord = true : whatFlavorNoteQ === '11' ? min11thChord = true : min13thChord = true; 
-        // spits out voicings with notes, numbers or both
-        if (wantNotes) {
-            if (min7thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(chord);
-            } else if (min9thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).minor9thVoicings());
-            } else if (min11thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).minor11thVoicings());
-            } else {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return console.log(new jazzChordNumbers(chord).minor11thVoicings());
-            }
-        }  
-        
-        if (wantNumbers) {
-            if (min7thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                return new jazzChordNumbers(chord).numberGenerator();
-            } else if (min9thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).minor9thVoicings());
-            } else if (min11thChord) {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).minor11thVoicings());
-            } else {
-                let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
-                let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
-                return console.log(new jazzChordNumbers(chordNumbers).minor13thVoicings());
-            }
-        } 
+// logic for major / dominant chord extensions and then for minor chord extensions
+if (whatChordQ === 'maj' || !whatChordQ) {
+    whatFlavorNoteQ = prompt('Would you like to make your current major triad chord a major 7th, 9th, 11th or 13th chord or possibly a dominant 13th chord? Type 7, 9, 11, 13 or dom13 respectively.\n')
+    
+    // determine if voicings are wanted, if not then return the chord
+    let wantVoicingsQ = prompt('Do you want additional smooth voicings with your chord extension? Type yes if so and no if not.\n');
+    if (wantVoicingsQ === 'yes') {
+        wantVoicings = true;
+    } else {
+        wantVoicings = false;
     }
-} else {
-    return console.log(new jazzChord(whatNoteQ, whatChordQ));
-}
 
+    if (!wantVoicings) {
+        return console.log(new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ).join(' - '));
+    }
+
+    // determine if notes, numbers or both are wanted
+    let wantNotesOrNumbersQ = prompt('Do you want your chord voicings in notes, numbers or both? Type notes, numbers or both respectively.\n');
+    if (wantNotesOrNumbersQ === 'notes') {
+        wantNotes = true;
+    } else if (wantNotesOrNumbersQ === 'numbers') {
+        wantNumbers = true;
+    } else {
+        wantNotes = true;
+        wantNumbers = true;
+    } 
+
+    // booleans to determine which chord voicings should be spit out using an object;
+    let maj7thChord = false;
+    let maj9thChord = false;
+    let maj11thChord = false;
+    let maj13thChord = false;
+    let dom13thChord = false;
+
+    // ternary operation for determining which voicings to use
+    whatFlavorNoteQ === '7' ? maj7thChord = true : whatFlavorNoteQ === '9' ? maj9thChord = true : whatFlavorNoteQ === '11' ? maj11thChord = true : whatFlavorNoteQ === '13' ? maj13thChord = true : dom13thChord = true; 
+
+    // spits out voicings with notes, numbers or both
+    if (wantNotes && wantNumbers) {
+        if (maj7thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log([console.log(chord), console.log(chordNumbers)]);
+        } else if (maj9thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return  console.log([console.log((new jazzChordNumbers(chord).major9thVoicings())), console.log((new jazzChordNumbers(chordNumbers).major9thVoicings()))]);
+        } else if (maj11thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log([console.log((new jazzChordNumbers(chord).major11thVoicings())), console.log((new jazzChordNumbers(chordNumbers).major11thVoicings()))]);
+        } else if (maj13thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log([console.log((new jazzChordNumbers(chord).major13thVoicings())), console.log((new jazzChordNumbers(chordNumbers).major13thVoicings()))]);
+        } else {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log([console.log((new jazzChordNumbers(chord).dominant13thVoicings())), console.log((new jazzChordNumbers(chordNumbers).dominant13thVoicings()))]);
+        }
+
+    } else if (wantNotes) {
+        if (maj7thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(chord);
+        } else if (maj9thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).major9thVoicings());
+        } else if (maj11thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).major11thVoicings());
+        } else if (maj13thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).major13thVoicings());
+        } else {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).dominant13thVoicings());
+        }
+    } else if (wantNumbers) {
+        if (maj7thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return new jazzChordNumbers(chord).numberGenerator();
+        } else if (maj9thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log(new jazzChordNumbers(chordNumbers).major9thVoicings());
+        } else if (maj11thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log(new jazzChordNumbers(chordNumbers).major11thVoicings());
+        } else if (maj13thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log(new jazzChordNumbers(chordNumbers).major13thVoicings());
+        } else {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log(new jazzChordNumbers(chordNumbers).dominant13thVoicings());
+        }
+    }
+
+} else if (whatChordQ === 'min' || whatChordQ === '-') {
+    whatFlavorNoteQ = prompt('Would you like to make your current minor triad chord a minor 7th, 9th or 11th chord? Type 7, 9, or 11 respectively.\n')
+    
+    // determine if voicings are wanted, if not then return the chord
+    let wantVoicingsQ = prompt('Do you want additional smooth voicings along with your chord extension? Type yes if so and no if not.\n');
+    if (wantVoicingsQ === 'yes') {
+        wantVoicings = true;
+    } else {
+        wantVoicings = false;
+    }
+
+    if (!wantVoicings) {
+        return console.log(new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ).join(' - '));
+    }
+
+    // determine if notes, numbers or both are wanted
+    let wantNotesOrNumbersQ = prompt('Do you want your chord voicings in notes, numbers or both? Type notes, numbers or both respectively.\n');
+    if (wantNotesOrNumbersQ === 'notes') {
+        wantNotes = true;
+    } else if (wantNotesOrNumbersQ === 'numbers') {
+        wantNumbers = true;
+    } else {
+        wantNotes = true;
+        wantNumbers = true;
+    }
+
+    // booleans to determine which chord voicings should be spit out using an object;
+    let min7thChord = false;
+    let min9thChord = false;
+    let min11thChord = false;
+    //let min13thChord = false;
+
+    // logic for determining which voicings to use
+    // TODO fix herbie hancock min11th setting
+
+    whatFlavorNoteQ === '7' ? min7thChord = true : whatFlavorNoteQ === '9' ? min9thChord = true : min11thChord = true; 
+    // spits out voicings with notes, numbers or both
+    if (wantNotes && wantNumbers) {
+        if (min7thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log([console.log(chord), console.log(chordNumbers)]);
+        } else if (min9thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return  console.log([console.log((new jazzChordNumbers(chord).minor9thVoicings())), console.log((new jazzChordNumbers(chordNumbers).minor9thVoicings()))]);
+        } else if (min11thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log([console.log((new jazzChordNumbers(chord).minor11thVoicings())), console.log((new jazzChordNumbers(chordNumbers).minor11thVoicings()))]);
+        } 
+
+    } else if (wantNotes) {
+        if (min7thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(chord);
+        } else if (min9thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).minor9thVoicings());
+        } else if (min11thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).minor11thVoicings());
+        } else {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return console.log(new jazzChordNumbers(chord).minor11thVoicings());
+        }
+    } else if (wantNumbers) {
+        if (min7thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            return new jazzChordNumbers(chord).numberGenerator();
+        } else if (min9thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log(new jazzChordNumbers(chordNumbers).minor9thVoicings());
+        } else if (min11thChord) {
+            let chord = new jazzChord(whatNoteQ, whatChordQ).chordExtension(whatFlavorNoteQ);
+            let chordNumbers = new jazzChordNumbers(chord).numberGenerator();
+            return console.log(new jazzChordNumbers(chordNumbers).minor11thVoicings());
+        }
+    } 
+
+} 
 
 // export statements
 module.exports = {
