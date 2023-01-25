@@ -410,4 +410,4 @@ console.log(cTonic.nineToneScale());
 */
 
 // exotic scales
-console.log(cTonic.balineseScale());
+//console.log(cTonic.balineseScale());
